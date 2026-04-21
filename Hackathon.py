@@ -59,7 +59,7 @@ st.info("""
 """)
 
 # Call to Action
-st.write("---")
+st.divider()
 col_btn1, col_btn2, col_btn3 = st.columns(3)
 with col_btn1:
     if st.button("🔍 Level Detector"):
@@ -70,6 +70,5 @@ with col_btn2:
         st.switch_page("pages/2_Word_Translator.py")
 
 with col_btn3:
-    if st.button("🚀 Start Learning"):
-        st.balloons()
-        st.success("أهلاً بك! Let's begin!")
+    if st.button("🇸🇦 Dialect Teacher"):
+        st.switch_page("pages/3_Dialect_Teacher.py")
