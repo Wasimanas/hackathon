@@ -1,0 +1,54 @@
+{
+  "beginner": [
+    {
+      "id": 1,
+      "question": "What is the meaning of 'مرحباً' (Marhaban)?",
+      "options": ["Goodbye", "Welcome", "Thank you", "Excuse me"],
+      "answer": "Welcome"
+    },
+    {
+      "id": 2,
+      "question": "How do you say 'Thank you' in Arabic?",
+      "options": ["Shukran", "Afwan", "Na'am", "La"],
+      "answer": "Shukran"
+    }
+  ],
+  "intermediate": [
+    {
+      "id": 3,
+      "question": "What does 'أين يقع المسجد؟' mean?",
+      "options": [
+        "Where is the hotel?",
+        "Where is the mosque?",
+        "Where is the market?",
+        "Where is the garden?"
+      ],
+      "answer": "Where is the mosque?"
+    },
+    {
+      "id": 4,
+      "question": "Choose the correct translation for 'I like tea':",
+      "options": [
+        "أنا أحب القهوة",
+        "أنا أحب الشاي",
+        "أنا أحب الماء",
+        "أنا أشرب الشاي"
+      ],
+      "answer": "أنا أحب الشاي"
+    }
+  ],
+  "advanced": [
+    {
+      "id": 5,
+      "question": "Identify the 'Mu'tall' (weak) verb in this list:",
+      "options": ["كتب", "جلس", "قال", "قرأ"],
+      "answer": "قال"
+    },
+    {
+      "id": 6,
+      "question": "What is the plural of 'كتاب' (Kitab)?",
+      "options": ["كتابان", "كتب", "كاتبون", "كتابات"],
+      "answer": "كتب"
+    }
+  ]
+}
