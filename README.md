@@ -25,4 +25,15 @@ streamlit run Hackathon.py
 
 > Note add .env in `GROQ_API`= your api key
 
+FOR DEPLOYMENT : 
+
+i've used a virtual machine, nginx as web server, nohup to keep the streamlit
+server active in the background.
+
+
+
+
+
+
+
 
