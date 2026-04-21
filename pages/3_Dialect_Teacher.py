@@ -11,12 +11,18 @@ client = Groq(api_key=os.getenv("GROQ_API"))
 
 st.set_page_config(page_title="Arabic → Saudi Speech", page_icon="🇸🇦")
 st.title("🇸🇦 Dialect Teacher: Saudi Arabic")
-st.caption("Enter a sentence in English or Arabic to hear it in the beautiful Saudi dialect.")
+st.caption(
+    "Enter a sentence in English or Arabic to hear it in the beautiful Saudi dialect."
+)
 
-user_input = st.text_area("Enter sentence", placeholder="e.g. How are you today? or كيف حالك؟", height=120)
+user_input = st.text_area(
+    "Enter sentence", placeholder="e.g. How are you today? or كيف حالك؟", height=120
+)
 
 # Voice Selection
-gender = st.radio("Select Voice Gender", ["Female (Noura)", "Male (Fahad)"], horizontal=True)
+gender = st.radio(
+    "Select Voice Gender", ["Female (Noura)", "Male (Fahad)"], horizontal=True
+)
 selected_voice = "noura" if "Female" in gender else "fahad"
 
 
@@ -28,14 +34,14 @@ def convert_to_saudi(text: str) -> str:
             {
                 "role": "system",
                 "content": (
-                    "You are an expert linguist specializing in the Saudi Arabic dialect (Najdi/Hejazi). "
+                    "You are a literal translator for the Saudi Arabic dialect. "
                     "CRITICAL RULES:\n"
-                    "1. SAFETY FIRST: If the input text contains even a hint of foul language, insults, sexual content, "
+                    "1. ZERO CONVERSATION: Never answer a question. Simply translate the text provided. Example: If the user types 'What is your name?', you MUST return the Saudi translation 'وش اسمك؟'. Do NOT say 'My name is AI' or anything similar.\n"
+                    "2. TRANSLATION ONLY: Your sole job is to convert the input (English or MSA) into Saudi dialect. If the input is a greeting or a question, translate it exactly as a question/greeting.\n"
+                    "3. SAFETY FIRST: If the input text contains even a hint of foul language, insults, sexual content, "
                     "violence, or extreme disrespect, you MUST return ONLY the string 'GUARDRAIL_TRIGGERED'. No exceptions.\n"
-                    "2. DIALECT AUTHENTICITY: If the text is safe, translate it into the most authentic Saudi dialect possible. "
-                    "Use local idioms and natural phrasing (e.g., using 'وشلونك' or 'وش خبارك' for 'How are you').\n"
-                    "3. BILINGUAL SUPPORT: Accept input in English, Modern Standard Arabic, or other Arabic dialects.\n"
-                    "4. OUTPUT FORMAT: Return ONLY the resulting Saudi Arabic sentence. No explanations, no prefixes."
+                    "4. DIALECT AUTHENTICITY: Use local Saudi idioms and natural phrasing.\n"
+                    "5. OUTPUT FORMAT: Return ONLY the resulting Saudi Arabic sentence. No explanations, no prefixes."
                 ),
             },
             {"role": "user", "content": text},
@@ -64,15 +70,21 @@ if st.button("Convert + Speak 🎧"):
             saudi_text = convert_to_saudi(user_input)
 
         if saudi_text == "GUARDRAIL_TRIGGERED":
-            st.error("🙄 My dear, let's keep it polite! A wise speaker chooses kind words.")
-            st.info("Try asking something like 'How is the weather?' or 'Where is the coffee?'")
+            st.error(
+                "🙄 My dear, let's keep it polite! A wise speaker chooses kind words."
+            )
+            st.info(
+                "Try asking something like 'How is the weather?' or 'Where is the coffee?'"
+            )
         else:
             st.subheader("🇸🇦 Saudi Arabic Dialect")
             st.success(saudi_text)
 
             with st.spinner(f"Generating {gender} voice..."):
                 # Use temp file
-                with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_file:
+                with tempfile.NamedTemporaryFile(
+                    delete=False, suffix=".wav"
+                ) as tmp_file:
                     speech_path = tmp_file.name
 
                 try:
@@ -81,4 +93,6 @@ if st.button("Convert + Speak 🎧"):
                     st.audio(speech_path, format="audio/wav")
                 except Exception as e:
                     st.error(f"Audio generation failed: {e}")
-                    st.info("I can provide the text, but the voice assistant is resting right now.")
+                    st.info(
+                        "I can provide the text, but the voice assistant is resting right now."
+                    )
